@@ -1,9 +1,6 @@
 <?php 
-    include_once $_SERVER['DOCUMENT_ROOT'] . '/VideoClub/libraries/functions.php';
-    include_once $_SERVER['DOCUMENT_ROOT'] . '/VideoClub/libraries/models/Actor.php';
-    include_once $_SERVER['DOCUMENT_ROOT'] . '/VideoClub/libraries/models/Pelicula.php';
-    include_once $_SERVER['DOCUMENT_ROOT'] . '/VideoClub/libraries/models/Usuario.php';
-    include_once $_SERVER['DOCUMENT_ROOT'] . '/VideoClub/templates/mensajeError.php';
+    include 'models/Usuario.php';
+    include 'controllers/UsuarioController.php';
     //Me devuelve un array con objetos
     session_start();
     if($_SERVER["REQUEST_METHOD"] == "POST"){

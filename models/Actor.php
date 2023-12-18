@@ -1,5 +1,5 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'].'./db/DB.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'./db/DB.php';
 class Actor {
     private $id;
     private $nombre;

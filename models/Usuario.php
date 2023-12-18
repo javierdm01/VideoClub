@@ -1,5 +1,5 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'].'./db/DB.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'./db/DB.php';
 class Usuario {
     private $id;
     private $username;
@@ -50,9 +50,21 @@ class Usuario {
         $this->rol = $rol;
     }
 
-        public function getUsuarios(){
+    public function getUsuarios(){
         $stmt= $this->pdo->prepare('SELECT * FROM usuarios');
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC); 
+    }
+    public function comprobarLogin($username,$password){
+        $sql = "SELECT * FROM usuarios WHERE username = :username AND password = :password";
+        
+        $stmt = $this->pdo->prepare($sql);
+        
+        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':password', $password);
+        
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }

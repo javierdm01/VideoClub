@@ -1,5 +1,5 @@
 <?php
-
+include_once $_SERVER['DOCUMENT_ROOT'].'./templates/mensajeError.php';
 class UsuarioController {
 
     // Obtiene una instancia del modelo y de la vista de tareas
@@ -12,10 +12,13 @@ class UsuarioController {
     }
 
     // Muestra la lista de tareas
-    public function listar() {
-        // Recupera la lista de tareas del modelo
-        $usuarios = $this->model->getUsuarios();
-        // Muestra la vista de la lista de tareas
-        $this->view->mostrarUsuarios($usuarios);
+    public function iniciarSesion($username,$password){
+        $usuario= $this->model->comprobarLogin($username, $password);
+        if($usuario){
+            header("Location: ./pages/homepages.php");
+        }
+        else{
+            echo mensajeError('El usuario o la contraseña no son válidas.');
+        }
     }
 }
