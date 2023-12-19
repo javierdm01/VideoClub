@@ -1,5 +1,5 @@
 <?php
-
+include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/view/PeliculaView.php';
 class PeliculaController {
 
     // Obtiene una instancia del modelo y de la vista de tareas
@@ -8,7 +8,7 @@ class PeliculaController {
 
     public function __construct() {
         $this->model = new Pelicula();
-        $this->view = new PeliculasView();
+        $this->view = new PeliculaView();
     }
 
     // Muestra la lista de tareas
@@ -21,5 +21,8 @@ class PeliculaController {
     public function editarPeliculas($post){
         // Recupera la lista de tareas del modelo
         $this->model->modificarPelicula($post);
+    }
+    public function mostrarInsertarPeliculas() {
+        $this->view->insertarPeliculas();
     }
 }

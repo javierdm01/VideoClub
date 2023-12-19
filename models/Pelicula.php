@@ -1,5 +1,5 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/db/DB.php';
+
 class Pelicula {
     private $id;
     private $titulo;
@@ -13,17 +13,13 @@ class Pelicula {
     private $bd;
     private $pdo; 
 
-    public function __construct($id, $titulo, $genero, $pais, $anyo, $cartel) {
-        $this->id = $id;
-        $this->titulo = $titulo;
-        $this->genero = $genero;
-        $this->pais = $pais;
-        $this->anyo = $anyo;
-        $this->cartel = $cartel;
-        $this->bd=new BD();
-        $this->pdo= $this->$bd->getPDO();
-        $this->closePDO= $this->$bd->closePDO();
+    public function __construct() {
+        include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/db/DB.php';
+        
+        $this->bd=new DB();
+        $this->pdo= $this->bd->getPDO();
     }
+    
     
      public function setId($id) {
         $this->id = $id;
@@ -72,7 +68,7 @@ class Pelicula {
         return $this->cartel;
     }
     public function getPeliculas(){
-        $stmt= $this->pdo->prepare('SELECT * FROM actores');
+        $stmt= $this->pdo->prepare('SELECT * FROM peliculas');
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC); 
     }
