@@ -2,14 +2,15 @@
 
     include $_SERVER['DOCUMENT_ROOT'].'/VideoClub/models/Usuario.php';
     include $_SERVER['DOCUMENT_ROOT'].'/VideoClub/controllers/UsuarioController.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/templates/mensajeError.php';
     //Me devuelve un array con objetos
     session_start();
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        if(isset($_POST['usr']) && isset($_POST['pass'])){
+        if($_POST['usr']!='' && $_POST['pass']!=''){
             $usuarioController = new UsuarioController();
             $usuarioController->iniciarSesion($_POST['usr'], $_POST['pass']);
         }else{
-            
+            mensajeError('Formulario no rellenado');
         }
     }
 ?>
