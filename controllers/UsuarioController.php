@@ -14,8 +14,9 @@ class UsuarioController {
 
     // Muestra la lista de tareas
     public function iniciarSesion($username,$password){
-        $usuario= $this->model->comprobarLogin($username, hash('sha512', $password));
+        $usuario= $this->model->comprobarLogin($username, hash('sha512', $password));     
         if($usuario){
+            $_SESSION['obj']=base64_encode(serialize($usuario));
             header("Location: ./pages/homepages.php");
         }
         else{
