@@ -1,5 +1,6 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'].'./db/DB.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/db/DB.php';
+
 class Usuario {
     private $id;
     private $username;
@@ -10,13 +11,13 @@ class Usuario {
     private $bd;
     private $pdo; 
     
-    public function __construct($id, $username, $password, $rol) {
-        $this->id = $id;
-        $this->username = $username;
-        $this->password = $password;
-        $this->rol = $rol;
-        $this->bd=new BD();
-        $this->pdo= $this->$bd->getPDO();
+    public function __construct() {
+        try {
+            $this->bd = new DB();
+            $this->pdo = $this->bd->getPDO();
+        } catch (Exception $e) {
+            echo("Error de conexión a la base de datos: " . $e->getMessage());
+        }
     }
 
     public function getId() {

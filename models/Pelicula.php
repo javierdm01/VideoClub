@@ -1,5 +1,5 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'].'./db/DB.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/db/DB.php';
 class Pelicula {
     private $id;
     private $titulo;

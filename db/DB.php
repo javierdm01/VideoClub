@@ -5,7 +5,7 @@ class DB {
     private $pdo;
 
     public function __construct() {
-        require_once 'config/Config.php';
+        include $_SERVER['DOCUMENT_ROOT']. '/VideoClub/config/config.php';
         try {
             // Crea una instancia de PDO para conectarse a la base de datos
             $this->pdo = new PDO("mysql:host=$host;dbname=$dbname", $usuario, $pwd);
@@ -20,7 +20,7 @@ class DB {
         return $this->pdo;
     }
     public function closePDO() {
-        return $this->pdo=null;
+        $this->pdo = null;
     }
     
 
