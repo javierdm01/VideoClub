@@ -1,14 +1,17 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/view/PeliculaView.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/controllers/ActorController.php';
 class PeliculaController {
 
     // Obtiene una instancia del modelo y de la vista de tareas
     private $model;
     private $view;
+    private $controller;
 
     public function __construct() {
         $this->model = new Pelicula();
         $this->view = new PeliculaView();
+        $this->controller= new ActorController();
     }
 
     // Muestra la lista de tareas
@@ -16,7 +19,10 @@ class PeliculaController {
         // Recupera la lista de tareas del modelo
         $peliculas = $this->model->getPeliculas();
         // Muestra la vista de la lista de tareas
-        $this->view->mostrarPeliculas($mod,$peliculas);
+        for ($i = 0; $i < count($peliculas); $i++) {
+            $this->view->mostrarPeliculas($mod,$peliculas,$i);
+            $this->controller->verActores($peliculas[$i]['id']);
+        }
     }
     public function editarPeliculas($post){
         // Recupera la lista de tareas del modelo

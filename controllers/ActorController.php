@@ -1,5 +1,6 @@
 <?php
-
+include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/view/ActorView.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/models/Actor.php';
 class ActorController {
 
     // Obtiene una instancia del modelo y de la vista de tareas
@@ -12,10 +13,8 @@ class ActorController {
     }
 
     // Muestra la lista de tareas
-    public function listar() {
-        // Recupera la lista de tareas del modelo
-        $actores = $this->model->getActores();
-        // Muestra la vista de la lista de tareas
+    public function verActores($id) {
+        $actores = $this->model->getActores($id);
         $this->view->mostrarActores($actores);
     }
 }

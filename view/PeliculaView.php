@@ -3,8 +3,7 @@
 class PeliculaView {
 
     // Muestra la lista de tareas
-    public function mostrarPeliculas(&$mod,$peliculas) {
-        for ($i = 0; $i < count($peliculas); $i++) {
+    public function mostrarPeliculas(&$mod,$peliculas,$i) {
             if ($mod === $i) {
                 echo '<tr><form method="POST" action="' . $_SERVER["PHP_SELF"] . '">';
                 echo '<input type="hidden" id="datos" name="datos" value="">';
@@ -40,7 +39,6 @@ class PeliculaView {
                     </form></td>';
                 echo '</tr>';
             }
-        }
     }
     
     public function insertarPeliculas(){

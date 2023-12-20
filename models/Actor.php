@@ -11,13 +11,9 @@ class Actor {
     private $pdo; 
 
 
-    public function __construct($id, $nombre, $apellido, $fotografia) {
-        $this->id = $id;
-        $this->nombre = $nombre;
-        $this->apellido = $apellido;
-        $this->fotografia = $fotografia;
-        $this->bd=new BD();
-        $this->pdo= $this->$bd->getPDO();
+    public function __construct() {
+        $this->bd=new DB();
+        $this->pdo= $this->bd->getPDO();
     }
 
     public function getId() {
@@ -52,11 +48,17 @@ class Actor {
         $this->fotografia = $fotografia;
     }
 
-    public function getActores(){
-        $stmt= $this->pdo->prepare('SELECT * FROM actores');
+    public function getActores($id) {
+        $stmt = $this->pdo->prepare('SELECT actores.nombre, actores.apellidos, actores.fotografia
+                                FROM actores
+                                JOIN actuan a ON a.idActor = actores.id
+                                JOIN peliculas p ON p.id = a.idPelicula
+                                WHERE p.id = :id');
+        $stmt->bindParam(':id', $id);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC); 
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
     public function modificarActor(){
         $sql = "UPDATE actores SET 
                 id = :id, 
