@@ -15,14 +15,19 @@ class PeliculaController {
     }
 
     // Muestra la lista de tareas
-    public function verPeliculas(&$mod) {
+    public function verPeliculas(&$mod,$admin=false) {
         // Recupera la lista de tareas del modelo
         $peliculas = $this->model->getPeliculas();
         // Muestra la vista de la lista de tareas
+        $this->view->mostrarCabecera($admin);
         for ($i = 0; $i < count($peliculas); $i++) {
             $this->view->mostrarPeliculas($mod,$peliculas,$i);
             $this->controller->verActores($peliculas[$i]['id']);
+            if($admin){
+                $this->view->mostrarAcciones($peliculas[$i]['id']);
+            }
         }
+        $this->view->mostrarFin();
     }
     public function editarPeliculas($post){
         // Recupera la lista de tareas del modelo

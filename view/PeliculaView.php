@@ -1,9 +1,41 @@
 <?php
 
 class PeliculaView {
-
+    public function mostrarCabecera($admin) {
+        echo '<thead>
+                <tr>
+                    <th class="col">Cartel</td>
+                    <th class="col">Título</td>
+                    <th class=col">Género</td>
+                    <th class="col">País</td>
+                    <th class="col">Año</td>
+                    <th class="col">Reparto</td>';
+             if($admin){
+                 echo '<th class="col">Editar</td>
+                    <th class="col">Eliminar</td>';
+             }       
+            echo    '</tr>
+            </thead>
+            <tbody>';
+    }
     // Muestra la lista de tareas
+    public function mostrarFin(){
+        echo '</tbody>';
+    }
+    public function mostrarAcciones($id){
+        echo '<td><form method="POST" action="' . $_SERVER["PHP_SELF"] . '">
+                        <input type="hidden" name="mod" value="' . $id . '">
+                        <button class="btn btn-primary border" type="submit"><i class="fa-solid fa-pencil"></i></button>
+                    </form></td>';
+                echo '<td><form method="POST" action="' . $_SERVER["PHP_SELF"] . '">
+                        <input type="hidden" name="clear" value="' . $id . '">
+                        <button class="btn btn-danger border" type="submit"><i class="fa-solid fa-trash"></i></button>
+                    </form></td>';
+                echo '</tr>';
+    }
+    
     public function mostrarPeliculas(&$mod,$peliculas,$i) {
+        
             if ($mod === $i) {
                 echo '<tr><form method="POST" action="' . $_SERVER["PHP_SELF"] . '">';
                 echo '<input type="hidden" id="datos" name="datos" value="">';
@@ -23,21 +55,14 @@ class PeliculaView {
                 echo '</form></tr>';
             } else {
                 echo '<tr>
-                    
                     <td class="w-25"><img class="w-50 mx-auto img-fluid" src="../assets/img/' . $peliculas[$i]['cartel'] . '"></td>
-                    <td class= w-50"><h2 class="fs-3">' . $peliculas[$i]['titulo'] . '</h2>'
-                . '<p>' . $peliculas[$i]['genero'] . '</p>'
-                . '<p>' . $peliculas[$i]['pais'] . '</p>'
-                . '<p>' . $peliculas[$i]['anyo'] . '</p></td>';
-                echo '<td><form method="POST" action="' . $_SERVER["PHP_SELF"] . '">
-                        <input type="hidden" name="mod" value="' . $i . '">
-                        <button class="btn btn-primary border" type="submit"><i class="fa-solid fa-pencil"></i></button>
-                    </form></td>';
-                echo '<td><form method="POST" action="' . $_SERVER["PHP_SELF"] . '">
-                        <input type="hidden" name="clear" value="' . $peliculas[$i]['id'] . '">
-                        <button class="btn btn-danger border" type="submit"><i class="fa-solid fa-trash"></i></button>
-                    </form></td>';
-                echo '</tr>';
+                    <td class= w-50"><h2 class="fs-3">' . $peliculas[$i]['titulo'] . '</h2>
+                    <td><p>' . $peliculas[$i]['genero'] . '</p></td>
+                    <td><p>' . $peliculas[$i]['pais'] . '</p></td>
+                    <td><p>' . $peliculas[$i]['anyo'] . '</p></td>
+                    ';
+                
+                
             }
     }
     
@@ -95,3 +120,4 @@ class PeliculaView {
         </div>';
     }
 }
+   

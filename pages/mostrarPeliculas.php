@@ -16,7 +16,7 @@
 
 <body>
 <?php
-    
+    $admin=true;
     
  
 ?>
@@ -24,14 +24,12 @@
     <div class="container mt-4">
         <h1 class="text-center mb-5">Peliculas</h1>
         <!-- Caracteristicas de coches -->
-        <table class="table">
-            <tbody>
+        <table class="table text-center">
                 <?php
                     //This function print data for table cars
-                    $peliculaController->verPeliculas($mod);
+                    $peliculaController->verPeliculas($mod,$admin);
                 ?>
 
-            </tbody>
         </table>
         <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#agregarCoche">Agregar Coche</button>
         <!-- INICIO MODAL -->
