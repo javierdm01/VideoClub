@@ -47,7 +47,12 @@ class Actor {
     public function setFotografia($fotografia): void {
         $this->fotografia = $fotografia;
     }
-
+    public function extraerActores(){
+        $stmt = $this->pdo->prepare('SELECT *
+                                FROM actores');
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
     public function getActores($id) {
         $stmt = $this->pdo->prepare('SELECT actores.nombre, actores.apellidos, actores.fotografia
                                 FROM actores

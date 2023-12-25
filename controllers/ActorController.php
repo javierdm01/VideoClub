@@ -17,4 +17,7 @@ class ActorController {
         $actores = $this->model->getActores($id);
         $this->view->mostrarActores($actores);
     }
+    public function obtenerActores(){
+        return $this->model->extraerActores();
+    }
 }

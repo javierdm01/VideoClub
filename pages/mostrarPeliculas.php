@@ -29,6 +29,9 @@
      if(isset($_POST['datos'])){
          $peliculaController->editarPeliculas($_POST);
      }
+     if(isset($_POST['insertar'])){
+         $peliculaController->insertarPeliculas($_POST);
+     }
 ?>
 
     <div class="container mt-4">
@@ -42,13 +45,15 @@
 
         </table>
         
-        <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#agregarCoche">Agregar Coche</button>
+        <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#insertarPeliculas">Insertar Pelicula</button>
         <!-- INICIO MODAL -->
                 <?php
                     $peliculaController->mostrarInsertarPeliculas();
                 ?>
         <!-- FIN MODAL -->
     </div>
+    
+
 
     <!-- JavaScript y jQuery para habilitar los componentes de Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

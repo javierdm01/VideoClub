@@ -35,8 +35,12 @@ class PeliculaController {
         // Recupera la lista de tareas del modelo
         $this->model->modificarPelicula($post);
     }
+    public function insertarPeliculas($post){
+        $this->model->insertarPelicula($post);
+    }
     public function mostrarInsertarPeliculas() {
-        $this->view->insertarPeliculas();
+        $actores= $this->controller->obtenerActores();
+        $this->view->insertarPeliculas($actores);
     }
     public function mostrarModal() {
         $this->view->modalModificar();

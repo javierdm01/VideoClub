@@ -78,8 +78,8 @@ class PeliculaView {
             }
     }
     
-    public function insertarPeliculas(){
-        echo '<div class="modal fade" id="agregarCoche" >
+    public function insertarPeliculas($actores){
+        echo '<div class="modal" id="insertarPeliculas" >
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -89,43 +89,46 @@ class PeliculaView {
                         </button>
                     </div>
                     <div class="modal-body">
-                        <!-- Agregar Nuevo coche-->
-                        <form method="POST" action="<?php echo $_SERVER["PHP_SELF"] ?>">
+                        <!-- Agregar Nueva Pelicula-->
+                        <form method="POST" action="'. $_SERVER["PHP_SELF"] .'">
+                            <input type="hidden" id="insertar" name="insertar" value="">
+                            <input type="hidden" id="id" name="insertar" value="'. count($actores)+1 .'">
                             <div class="form-group">
-                                <label for="vin">VIN</label>
-                                <input  value="<?= $formError ? $_POST["vin"] : "" ?>" type="text" name="vin" class="form-control" id="vin" placeholder="Ejemplo: JH4DC4400SS012345" required>
+                                <label for="vin">Titulo</label>
+                                <input type="text" name="titulo" class="form-control" id="titulo" placeholder=" Harry Potter" required>
                             </div>
                             <div class="form-group">
-                                <label for="matricula">Matricula</label>
-                                <input value="<?= $formError ? $_POST["matricula"] : "" ?>" type="text" name="matricula"  class="form-control" id="matricula" placeholder="Ejemplo: 4321-DCB" required>
+                                <label for="matricula">Género</label>
+                                <input type="text" name="genero"  class="form-control" id="genero" placeholder=" Crimen" required>
                             </div>
                             <div class="form-group">
-                                <label for="marca">Marca</label>
-                                <input value="<?= $formError ? $_POST["marca"] : "" ?>" type="text" name="marca"  class="form-control" id="marca" placeholder="Ejemplo: Toyota" required>
+                                <label for="marca">País</label>
+                                <input type="text" name="pais"  class="form-control" id="pais" placeholder=" España" required>
                             </div>
                             <div class="form-group">
-                                <label for="modelo">Modelo</label>
-                                <input value="<?= $formError ? $_POST["modelo"] : "" ?>" type="text" name="modelo"  class="form-control" id="modelo" placeholder="Ejemplo: Camry" required>
+                                <label for="modelo">Año</label>
+                                <input type="number" name="anyo"  class="form-control" id="anyo" placeholder=" 2022" required>
                             </div>
-                            <div class="form-group">
-                                <label for="ano">Año</label>
-                                <input value="<?= $formError ? $_POST["año"] : "" ?>" type="number" name="ano"  class="form-control" id="ano" placeholder="Ejemplo: 2023" required>
+                            <div class="form-group d-flex flex-column">
+                                <label for="reparto">Reparto</label>
+                                <div id="reparto" class="d-flex justify-content-around flex-wrap">
+                                    ';
+                                    for($i=0;$i<count($actores);$i++){
+                                        
+                                    echo '<div class="w-25 m-1"><input class="form-check-input" type="checkbox" value="'.$actores[$i]['id'].'" name="actores[]" id="'.$actores[$i]['id'].'">
+                                    <label class="form-check-label" for="'.$actores[$i]['id'].'">
+                                        '.$actores[$i]['nombre'].' '. substr($actores[$i]['apellidos'], 0, 2).'
+                                    </label></div>';
+                                    }
+                                    
+                                  echo '</div>
+                                    
                             </div>
-                            <div class="form-group">
-                                <label for="precio">Precio</label>
-                                <input value="<?= $formError ? $_POST["precio"] : "" ?>" type="number" name="precio"  class="form-control" id="precio" placeholder="Ejemplo: 25000" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="km">KM</label>
-                                <input value="<?= $formError ? $_POST["km"] : "" ?>" type="number" name="km"  class="form-control" id="km" placeholder="Ejemplo: 150000" required>
-                            </div>
-
-
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                 <input type="submit" class="btn btn-primary" value="Guardar">
-                            </div>
-                        </form>
+                            </div>';
+                        echo '</form>
                     </div>
                 </div>
             </div>
