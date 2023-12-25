@@ -1,6 +1,16 @@
 <?php
     include $_SERVER['DOCUMENT_ROOT'].'/VideoClub/models/Pelicula.php';
     include $_SERVER['DOCUMENT_ROOT'].'/VideoClub/controllers/PeliculaController.php';
+    session_start();
+    if(isset($_SESSION['obj'])){
+        $usu = (unserialize(base64_decode($_SESSION['obj'])));
+        if ($usu['rol']==1) {
+            $admin=true;
+        }
+    }
+    if(isset($_POST['mod'])){
+        $mod=$_POST['mod'];
+    }
     $peliculaController = new PeliculaController();
 ?>
 <!DOCTYPE html>
@@ -16,9 +26,9 @@
 
 <body>
 <?php
-    $admin=true;
-    
- 
+     if(isset($_POST['datos'])){
+         $peliculaController->editarPeliculas($_POST);
+     }
 ?>
 
     <div class="container mt-4">
@@ -31,6 +41,7 @@
                 ?>
 
         </table>
+        
         <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#agregarCoche">Agregar Coche</button>
         <!-- INICIO MODAL -->
                 <?php

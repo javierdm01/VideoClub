@@ -1,7 +1,6 @@
 <?php
     session_start();
     $usu = (unserialize(base64_decode($_SESSION['obj'])));
-    print_r($usu);
     
     
 ?>

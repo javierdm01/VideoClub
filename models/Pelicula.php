@@ -72,7 +72,7 @@ class Pelicula {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC); 
     }
-    public function modificarPelicula(){
+    public function modificarPelicula($post){
         $sql = "UPDATE peliculas SET 
                 titulo = :titulo, 
                 genero = :genero, 
@@ -82,17 +82,16 @@ class Pelicula {
                 WHERE id = :id";
         $stmt= $this->pdo->prepare($sql);
         
-        $stmt->bindParam(':id', $this->id);
-        $stmt->bindParam(':titulo', $this->titulo);
-        $stmt->bindParam(':genero', $this->genero);
-        $stmt->bindParam(':pais', $this->pais);
-        $stmt->bindParam(':anyo', $this->anyo);
-        $stmt->bindParam(':cartel', $this->cartel);
+        $stmt->bindParam(':id', $post['id']);
+        $stmt->bindParam(':titulo', $post['titulo']);
+        $stmt->bindParam(':genero', $post['genero']);
+        $stmt->bindParam(':pais', $post['pais']);
+        $stmt->bindParam(':anyo', $post['anyo']);
+        $stmt->bindParam(':cartel', $post['cartel']);
         
         $stmt->execute();
         $stmt->fetchAll(PDO::FETCH_ASSOC); 
         
-        $stmt->closePDO();
     }
     public function insertarPelicula(){
          $sql = "INSERT INTO peliculas (id,titulo, genero, pais, anyo, cartel) 
