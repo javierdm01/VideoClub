@@ -2,6 +2,7 @@
 include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/view/PeliculaView.php';
 include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/controllers/ActorController.php';
 include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/templates/mensajeError.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/templates/mensajeCheck.php';
 class PeliculaController {
 
     // Obtiene una instancia del modelo y de la vista de tareas
@@ -57,5 +58,8 @@ class PeliculaController {
     }
     public function mostrarModal() {
         $this->view->modalModificar();
+    }
+    public function eliminarPeliculas($id){
+        $this->model->eliminarPelicula($id);
     }
 }

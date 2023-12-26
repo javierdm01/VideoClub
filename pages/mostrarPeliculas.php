@@ -32,6 +32,9 @@
      if(isset($_POST['insertar'])){
          $peliculaController->insertarPeliculas($_POST);
      }
+     if(isset($_POST['clear'])){
+         $peliculaController->eliminarPeliculas($_POST['clear']);
+     }
 ?>
 
     <div class="container mt-4">

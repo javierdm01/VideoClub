@@ -28,9 +28,10 @@ class PeliculaView {
                         <button class="btn btn-primary border" type="submit"><i class="fa-solid fa-pencil"></i></button>
                     </form></td>';
                 echo '<td><form method="POST" action="' . $_SERVER["PHP_SELF"] . '">
-                        <input type="hidden" name="clear" value="' . $id . '">
-                        <button class="btn btn-danger border" type="submit"><i class="fa-solid fa-trash"></i></button>
-                    </form></td>';
+                        <input type="hidden" name="clear" id="clear" value="' . $id . '">
+                        '.$this->modalEliminar($id).'
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#eliminar'.$id.'"><i class="fa-solid fa-trash"></i></button>
+                        </form></td>';
                 echo '</tr>';
     }
     
@@ -139,7 +140,7 @@ class PeliculaView {
         </div>';
     }
     
-    public function modalModificar(){
+    public function modalModificar() {
         echo '<div class="modal" id="miModal">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -163,5 +164,31 @@ class PeliculaView {
                 </div>
         </div></form>';
     }
+    public function modalEliminar($id) {
+        echo '<div class="modal" id="eliminar'.$id.'">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modificar Pelicula</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Agregar Nuevo coche-->
+                        <form method="POST" action="' . $_SERVER["PHP_SELF"] . '">
+                            <h2>¿Estás seguro que quieres eliminar esta pelicula?</h2>
+
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                <input type="submit" class="btn btn-primary" value="Eliminar">
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>';
+    }
 }
-   
+
+

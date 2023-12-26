@@ -73,26 +73,30 @@ class Pelicula {
         return $stmt->fetchAll(PDO::FETCH_ASSOC); 
     }
     public function modificarPelicula($post){
-        $sql = "UPDATE peliculas SET 
+        try {
+            $sql = "UPDATE peliculas SET 
                 titulo = :titulo, 
                 genero = :genero, 
                 pais = :pais, 
                 anyo = :anyo, 
                 cartel = :cartel 
                 WHERE id = :id";
-        $stmt= $this->pdo->prepare($sql);
-        
-        $stmt->bindParam(':id', $post['id']);
-        $stmt->bindParam(':titulo', $post['titulo']);
-        $stmt->bindParam(':genero', $post['genero']);
-        $stmt->bindParam(':pais', $post['pais']);
-        $stmt->bindParam(':anyo', $post['anyo']);
-        $stmt->bindParam(':cartel', $post['cartel']);
-        
-        $stmt->execute();
-        $stmt->fetchAll(PDO::FETCH_ASSOC); 
-        
-    }
+            $stmt= $this->pdo->prepare($sql);
+
+            $stmt->bindParam(':id', $post['id']);
+            $stmt->bindParam(':titulo', $post['titulo']);
+            $stmt->bindParam(':genero', $post['genero']);
+            $stmt->bindParam(':pais', $post['pais']);
+            $stmt->bindParam(':anyo', $post['anyo']);
+            $stmt->bindParam(':cartel', $post['cartel']);
+
+            $stmt->execute();
+            $stmt->fetchAll(PDO::FETCH_ASSOC); 
+            mensajeCheck('Se ha modificado correctamente la pelicula');
+        } catch (Exception ) {
+            mensajeError('Se ha producido un error al modificar la película.');
+        }
+        }
     public function insertarPelicula($post){
         try {
             $sql = "INSERT INTO peliculas (id,titulo, genero, pais, anyo, cartel) 
@@ -109,8 +113,9 @@ class Pelicula {
 
             $stmt->execute();
             $stmt->fetchAll(PDO::FETCH_ASSOC);
+            mensajeCheck('Se ha insertado correctamente la pelicula');
         } catch (Exception) {
-            echo mensajeError('Se ha producido un error al insertar la pelicula.');
+           mensajeError('Se ha producido un error al insertar la película.');
         }
 
 
@@ -123,36 +128,47 @@ class Pelicula {
                 $stmt2->bindParam(':idActor', $post['actores'][$i]);
                 $stmt2->execute();
                 $stmt2->fetchAll(PDO::FETCH_ASSOC);
+                mensajeCheck('Se ha insertado correctamente los actores a la película.');
             }
         } catch (Exception $exc) {
-            echo $exc->getMessage();
-            echo mensajeError('Se ha producido un error al insertar los actores en la pelicula');
+             mensajeError('Se ha producido un error al insertar los actores en la pelicula');
         }
         
     }
-    public function eliminarPelicula(){
-        $sql = "DELETE FROM actuan WHERE idPelicula = :id";
+    public function eliminarPelicula($id){
+        try {
+            $sql = "DELETE FROM actuan WHERE idPelicula = :id";
         
-        $stmt= $this->pdo->prepare($sql);
+            $stmt= $this->pdo->prepare($sql);
+
+            $stmt->bindParam(':id', $id);
+
+            $stmt->execute();
+
+            $stmt->fetchAll(PDO::FETCH_ASSOC);
+            mensajeCheck('Se ha eliminado correctamente');
+        } catch (Exception) {
+             mensajeError('Se ha producido un error al eliminar las peliculas');
+        }
         
-        $stmt->bindParam(':id', $this->id);
         
-        $stmt->execute();
-        
-        $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-        $stmt->closePDO();
-        
-        $sql2 = "DELETE FROM peliculas WHERE id = :id";
+        try {
+            $sql2 = "DELETE FROM peliculas WHERE id = :id";
          
-        $stmt2= $this->pdo->prepare($sql2);
+            $stmt2= $this->pdo->prepare($sql2);
+
+            $stmt2->bindParam(':id', $id);
+
+            $stmt2->execute();
+
+            $stmt2->fetchAll(PDO::FETCH_ASSOC);
+            mensajeCheck('Se ha modificado correctamente');
+        } catch (Exception ) {
+             mensajeError('Se ha producido un error al eliminar las peliculas');
+        }
+    
+
         
-        $stmt2->bindParam(':id', $this->id);
         
-        $stmt2->execute();
-        
-        $stmt2->fetchAll(PDO::FETCH_ASSOC);
-        
-        $stmt2->closePDO();
     }
 }
