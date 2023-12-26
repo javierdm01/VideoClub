@@ -1,6 +1,7 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/view/PeliculaView.php';
 include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/controllers/ActorController.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/templates/mensajeError.php';
 class PeliculaController {
 
     // Obtiene una instancia del modelo y de la vista de tareas
@@ -36,11 +37,23 @@ class PeliculaController {
         $this->model->modificarPelicula($post);
     }
     public function insertarPeliculas($post){
-        $this->model->insertarPelicula($post);
+        $peliculas=$this->model->getPeliculas();
+        $valido=true;
+        for($i=0;$i<count($peliculas);$i++){
+            if($peliculas[$i]['titulo']==$post['titulo']){
+                $valido=false;
+            }
+        }
+        if($valido){
+            $this->model->insertarPelicula($post);
+        }else{
+            echo mensajeError('El titulo está repetido, intentelo de nuevo');
+        }
     }
     public function mostrarInsertarPeliculas() {
         $actores= $this->controller->obtenerActores();
-        $this->view->insertarPeliculas($actores);
+        $pelicula=$this->model->getPeliculas();
+        $this->view->insertarPeliculas($actores,$pelicula);
     }
     public function mostrarModal() {
         $this->view->modalModificar();

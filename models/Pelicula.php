@@ -1,5 +1,5 @@
 <?php
-
+include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/templates/mensajeError.php';
 class Pelicula {
     private $id;
     private $titulo;
@@ -94,23 +94,41 @@ class Pelicula {
         
     }
     public function insertarPelicula($post){
-         $sql = "INSERT INTO peliculas (id,titulo, genero, pais, anyo, cartel) 
+        try {
+            $sql = "INSERT INTO peliculas (id,titulo, genero, pais, anyo, cartel) 
                 VALUES (:id, :titulo, :genero, :pais, :anyo, :cartel)";
          
-        $stmt= $this->pdo->prepare($sql);
+            $stmt= $this->pdo->prepare($sql);
+
+            $stmt->bindParam(':id', $post['id']);
+            $stmt->bindParam(':titulo', $post['titulo']);
+            $stmt->bindParam(':genero', $post['genero']);
+            $stmt->bindParam(':pais', $post['pais']);
+            $stmt->bindParam(':anyo', $post['anyo']);
+            $stmt->bindParam(':cartel', $post['cartel']);
+
+            $stmt->execute();
+            $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception) {
+            echo mensajeError('Se ha producido un error al insertar la pelicula.');
+        }
+
+
+        try {
+            for($i=0;$i<count($post['actores']);$i++){
+                $sql="INSERT INTO actuan (idPelicula, idActor) 
+                    VALUES (:idPelicula, :idActor)";
+                $stmt2= $this->pdo->prepare($sql);
+                $stmt2->bindParam(':idPelicula', $post['id']);
+                $stmt2->bindParam(':idActor', $post['actores'][$i]);
+                $stmt2->execute();
+                $stmt2->fetchAll(PDO::FETCH_ASSOC);
+            }
+        } catch (Exception $exc) {
+            echo $exc->getMessage();
+            echo mensajeError('Se ha producido un error al insertar los actores en la pelicula');
+        }
         
-        $stmt->bindParam(':id', $post['id']);
-        $stmt->bindParam(':titulo', $post['titulo']);
-        $stmt->bindParam(':genero', $post['genero']);
-        $stmt->bindParam(':pais', $post['pais']);
-        $stmt->bindParam(':anyo', $post['anyo']);
-        $stmt->bindParam(':cartel', $post['cartel']);
-        
-        $stmt->execute();
-        $stmt->fetchAll(PDO::FETCH_ASSOC); 
-        
-        
-        $stmt->closePDO();
     }
     public function eliminarPelicula(){
         $sql = "DELETE FROM actuan WHERE idPelicula = :id";

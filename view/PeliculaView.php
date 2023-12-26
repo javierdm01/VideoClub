@@ -78,7 +78,7 @@ class PeliculaView {
             }
     }
     
-    public function insertarPeliculas($actores){
+    public function insertarPeliculas($actores,$peliculas){
         echo '<div class="modal" id="insertarPeliculas" >
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -92,7 +92,7 @@ class PeliculaView {
                         <!-- Agregar Nueva Pelicula-->
                         <form method="POST" action="'. $_SERVER["PHP_SELF"] .'">
                             <input type="hidden" id="insertar" name="insertar" value="">
-                            <input type="hidden" id="id" name="insertar" value="'. count($actores)+1 .'">
+                            <input type="hidden" id="id" name="id" value="'. count($peliculas)+1 .'">
                             <div class="form-group">
                                 <label for="vin">Titulo</label>
                                 <input type="text" name="titulo" class="form-control" id="titulo" placeholder=" Harry Potter" required>
@@ -108,6 +108,10 @@ class PeliculaView {
                             <div class="form-group">
                                 <label for="modelo">Año</label>
                                 <input type="number" name="anyo"  class="form-control" id="anyo" placeholder=" 2022" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cartel">Cartel</label>
+                                <input type="text" name="cartel"  class="form-control" id="cartel" placeholder=" titanic.jpg" required>
                             </div>
                             <div class="form-group d-flex flex-column">
                                 <label for="reparto">Reparto</label>
