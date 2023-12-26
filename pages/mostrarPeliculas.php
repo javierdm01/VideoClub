@@ -1,7 +1,9 @@
 <?php
     include $_SERVER['DOCUMENT_ROOT'].'/VideoClub/models/Pelicula.php';
     include $_SERVER['DOCUMENT_ROOT'].'/VideoClub/controllers/PeliculaController.php';
+    include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/libraries/functions.php';
     session_start();
+    comprobarInicio($_COOKIE);
     if(isset($_SESSION['obj'])){
         $usu = (unserialize(base64_decode($_SESSION['obj'])));
         if ($usu['rol']==1) {
@@ -38,6 +40,7 @@
 ?>
 
     <div class="container mt-4">
+        <?php include $_SERVER['DOCUMENT_ROOT'].'/VideoClub/templates/headerStyle.php'; ?>
         <h1 class="text-center mb-5">Peliculas</h1>
         <!-- Caracteristicas de coches -->
         <table class="table text-center">

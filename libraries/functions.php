@@ -15,3 +15,19 @@ function enviarMail() {
         echo 'El archivo no existe.';
     }
 }
+function comprobarInicio($cookie) {
+    if (!$cookie['ultCone']) {
+        header('Location: ../index.php');
+    }else{
+        $fechaActual=new DateTime();
+        $fechaActualFormato = $fechaActual->format('Y-m-d H:i:s');
+        setcookie('ultCone', $fechaActualFormato, time() + 300, '/');
+    }
+}
+function cerrarSesion(&$sesion) {
+    $sesion = array();
+    session_destroy();
+    setcookie("nombreSesion", 123, time() - 1000, "localhost");
+    setcookie("ultCone", 123, time() - 1000, "localhost");
+    setcookie("PHPSESSID", 123, time() - 1000, "localhost");
+}

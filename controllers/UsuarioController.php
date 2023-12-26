@@ -1,5 +1,6 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/templates/mensajeError.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/libraries/functions.php';
 class UsuarioController {
 
     // Obtiene una instancia del modelo y de la vista de tareas
@@ -17,6 +18,9 @@ class UsuarioController {
         $usuario= $this->model->comprobarLogin($username, hash('sha512', $password));     
         if($usuario){
             $_SESSION['obj']=base64_encode(serialize($usuario));
+            $fechaActual=new DateTime();
+            $fechaActualFormato = $fechaActual->format('Y-m-d H:i:s');
+            setcookie('ultCone', $fechaActualFormato, time() + 300, '/');
             header("Location: ./pages/homepages.php");
         }
         else{

@@ -3,7 +3,8 @@
     include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/templates/mensajeCheck.php';
     include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/templates/mensajeError.php';
     session_start();
-    $usu = (unserialize(base64_decode($_SESSION['obj'])));
+    comprobarInicio($_COOKIE);
+    $usu = (unserialize(base64_decode($_SESSION['obj'])));  
     if(isset($_GET['trr'])){
         mensajeCheck('Correo enviado con éxito');
     }
@@ -28,10 +29,12 @@
 <!--INICIO DEL BODY -->
 <body>
     <!--INICIO DE LA CABECERA -->
+    
     <!--FIN DE LA CABECERA -->
     <!--INICIO DEL CONTENEDOR -->
-    <div class="container-fluid">
-            <main class="col-md-12 ms-sm-auto px-md-4">
+    <div class="container">
+            <?php include $_SERVER['DOCUMENT_ROOT'].'/VideoClub/templates/headerStyle.php'; ?>
+            <main class="col-md-12">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">

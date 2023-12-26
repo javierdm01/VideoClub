@@ -1,8 +1,9 @@
 <?php
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/VideoClub/libraries/functions.php';
     session_start();
     $usu = (unserialize(base64_decode($_SESSION['obj'])));
     
-    
+    comprobarInicio($_COOKIE);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -17,40 +18,17 @@
 <!--INICIO DEL BODY -->
 <body>
     <!--INICIO DE LA CABECERA -->
-    <header>
-        <h1>VideoClub</h1>
-    </header>
     <!--FIN DE LA CABECERA -->
+    <?php include $_SERVER['DOCUMENT_ROOT'].'/VideoClub/templates/headerStyle.php'; ?>
     <!--INICIO DEL CONTENEDOR -->
     <div class="container-fluid">
         <div class="row">
-            <nav id="sidebar" class="col-sm-3 d-md-block bg-light sidebar">
-                <div class="position-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item my-1">
-                            <a class="nav-link active" href="#">
-                                <i class="fa-solid fa-user rounded-circle mx-2 border px-1 pt-1"></i>Inicio
-                            </a>
-                        </li>
-                        <li class="nav-item m-1">
-                            <a class="nav-link" href="./mostrarPeliculas.php">
-                                <i class="fa-solid fa-shop mx-2"></i>Mostrar Películas
-                            </a>
-                        </li>
-                        <li class="nav-item m-1">
-                            <a class="nav-link" href="./enviarMail.php">
-                                <i class="fa-solid fa-car mx-2"></i>Enviar Mail
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-            <main class="col-md-8 ms-sm-auto px-md-4">
-                <div class="col-xl-5 col-sm-7 mb-5 mx-auto">
+            <main class="col-md-12 ms-sm-auto px-md-4">
+                <div class="col-xl-5 col-sm-12 mb-5 mx-auto">
                     <div class="bg-white rounded shadow-sm py-5 px-4">
-                        <img src="../assets/img/trabajador.jpg" alt="Foto de perfil" width="100" class="img-fluid rounded-circle mb-3 mx-auto d-block  img-thumbnail shadow-sm">
-                        <h2 class="mb-3 mx-auto col-lg-14 text-center">Bienvenido <span class="display-4"></span></h2>
-                        
+                        <img src="../assets/img/brad_pitt.jpg" alt="Foto de perfil" width="100" class="img-fluid rounded-circle mb-3 mx-auto d-block  img-thumbnail shadow-sm">
+                        <h2 class="mb-3 mx-auto col-lg-14 text-center">Bienvenido a nuestro VideoClub <?php echo $usu['username']?></h2>
+                        <p class="small text-uppercase text-muted text-center">Última conexión <span><?php echo isset($_COOKIE["ultCone"]) ? $_COOKIE["ultCone"] : "error no existe la cookie ultCone"; ?></span></p>
                     </div>
                 </div>
             </main>
