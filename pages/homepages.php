@@ -38,8 +38,8 @@
                             </a>
                         </li>
                         <li class="nav-item m-1">
-                            <a class="nav-link" href="./mostrarUsuarios.php">
-                                <i class="fa-solid fa-car mx-2"></i>Ver Usuarios
+                            <a class="nav-link" href="./enviarMail.php">
+                                <i class="fa-solid fa-car mx-2"></i>Enviar Mail
                             </a>
                         </li>
                     </ul>
