@@ -1,19 +1,32 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/templates/mensajeError.php';
 include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/libraries/functions.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/view/loginView.php';
+/**
+ * Clase UsuarioController
+ */
 class UsuarioController {
 
     // Obtiene una instancia del modelo y de la vista de tareas
     private $model;
     private $view;
-
+    private $loginView;
+    /**
+     * Constructor de la clase UsuarioController
+     */
     public function __construct() {
         include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/view/UsuarioView.php';
         $this->model = new Usuario();
         $this->view = new UsuarioView();
+        $this->loginView=new LoginView();
     }
 
-    // Muestra la lista de tareas
+    /**
+     * Controlador para comprobar si es correcta el formulario de inicio
+     * 
+     * @param string $username nombre de usuario
+     * @param string $password contraseña de usuario
+     */
     public function iniciarSesion($username,$password){
         $usuario= $this->model->comprobarLogin($username, hash('sha512', $password));
         $fechaActual=new DateTime();
@@ -31,7 +44,11 @@ class UsuarioController {
             $this->model->enviarLogs('El usuario '.$username.' ha intentado iniciar sesión con fecha '.$fechaActualFormato.' no satisfactorio');
         }
     }
+    /**
+     * Controlador para mostrar el Login
+     * 
+     */
     public function mostrarFormulario() {
-        include $_SERVER['DOCUMENT_ROOT']. '/VideoClub/view/loginView.php';
+       $this->loginView->mostrarLogin();
     }
 }
