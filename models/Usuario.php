@@ -2,23 +2,47 @@
 
 include_once $_SERVER['DOCUMENT_ROOT'] . '/VideoClub/db/DB.php';
 
+/**
+ * Clase Usuario
+ */
 class Usuario {
-
+     /**
+     * @var number identificador del Usuario
+     */
     private $id;
+    /**
+     * @var varchar username del User
+     */
     private $username;
+    /**
+     * @var varchar contraseña del User
+     */
     private $password;
+    /**
+     * @var number rol (0 o 1 depende si es admin o no)
+     */
     private $rol;
     //Conexion Atributtes
     private $bd;
     private $pdo;
-
+    /**
+     * Constructor de la clase Pelicula
+     */
     public function __construct() {
         $this->bd = new DB();
         $this->pdo = $this->bd->getPDO();
     }
-    public function __destruct() {
-        $this->pdo = null;
+    
+    /**
+     * Destructor de la clase Actor
+     */
+     public function __destruct() {
+        $this->bd->closePDO();
     }
+    
+    /**
+     * Getters and setters
+     */
 
     public function getId() {
         return $this->id;
@@ -51,7 +75,13 @@ class Usuario {
     public function setRol($rol): void {
         $this->rol = $rol;
     }
-
+    
+    /**
+     * Obtener todos los usuarios
+     *
+     * 
+     * @return array
+     */
     public function getUsuarios() {
         try {
             $stmt = $this->pdo->prepare('SELECT * FROM usuarios');
@@ -59,11 +89,16 @@ class Usuario {
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (Exception) {
             mensajeError('Se ha producido un error al obtener usuarios');
-        } finally {
-            $stmt->closePDO();
         }
     }
-
+    /**
+     * Comprobar inicio de Sesion
+     *
+     * @param String $username nombre de usuario
+     * @param String $password contraseña codificiada
+     * 
+     * @return array usuario
+     */
     public function comprobarLogin($username, $password) {
         try {
             $sql = "SELECT * FROM usuarios WHERE username = :username AND password = :password";
@@ -80,7 +115,10 @@ class Usuario {
             mensajeError('Se ha producido un error al comprobar usuarios');
         }
     }
-
+    /**
+     * Crear tabla log si no existe
+     *
+     */
     public function comprobarLogs() {
         try {
             $sql = "CREATE TABLE IF NOT EXISTS logs (mensaje varchar(255))";
@@ -91,7 +129,12 @@ class Usuario {
             mensajeError('Se ha producido un error al crearLogs');
         }
     }
-
+    /**
+     * Enviar logs de acceso
+     *
+     * @param String $mensaje mensaje para guardar en log
+     * 
+     */
     public function enviarLogs($mensaje) {
         try {
             $sql = "INSERT INTO logs (mensaje) VALUES ('$mensaje')";

@@ -72,6 +72,7 @@ class Actuan{
     /**
      * Devuelve un array con todas los valores de la tabla Actuan
      *
+     * @return array
      */
     public function getActuaciones(){
         try {
@@ -85,7 +86,8 @@ class Actuan{
     
     /**
      * Hace una insercción en la tabla Actuan 
-     *
+     * 
+     *@param array $post Datos para la insercción.
      */
     public function insertarActuacion($post){
         try {
@@ -107,6 +109,7 @@ class Actuan{
     /**
      * Actualiza en la tabla Actuan 
      *
+     * @param number $id identificador de la Pelicula
      */
     public function eliminarActuacion($id) {
         try {
