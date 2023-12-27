@@ -4,12 +4,15 @@
     include $_SERVER['DOCUMENT_ROOT'].'/VideoClub/controllers/UsuarioController.php';
     require_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/templates/mensajeError.php';
     require_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/libraries/functions.php';
-    //Me devuelve un array con objetos
+    
     session_start();
+    //Si se cierra sesión
     if(isset($_GET['crr'])){
         cerrarSesion($_SESSION);
     }
+    //Comprobar si la cookie sigue activa
     comprobarInicio();
+    //Comprueba si los datos del formulario son del formulario.
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         if($_POST['usr']!='' && $_POST['pass']!=''){
             $usuarioController = new UsuarioController();
@@ -27,7 +30,9 @@
         <title>Login</title>
     </head>
     <body>
+        
         <?php
+            //Mostramos el formulario
             $usuarioController = new UsuarioController();
             $usuarioController->mostrarFormulario();
         ?>

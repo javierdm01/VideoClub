@@ -1,9 +1,8 @@
 <?php
-
+/**
+ * Enviar Mails
+ */
 function enviarMail() {
-
-    //HAGO ESTO PARA QUE SE CARGUEN LAS DEPENDENCIAS DE PHP MAILER SOLO CUANDO HAYA QUE ENVIAR UN MAIL
-    //DE CASO CONTRARIO SE CARGARÍAN CADA VEZ QUE SE USA UNA FUNCIÓN
     // Ruta al archivo PHP que deseas incluir
     $rutaPHPMailer = $_SERVER['DOCUMENT_ROOT'] . '/VideoClub/config/configEmail.php';
     // Verificar si el archivo existe antes de incluirlo
@@ -15,6 +14,10 @@ function enviarMail() {
         echo 'El archivo no existe.';
     }
 }
+/**
+ * Comprueba si la cookie no existe o la renueva si existe
+ * @param arrays $cookie valores de la cookie
+ */
 function comprobarCookie($cookie) {
     if (!$cookie['ultCone']) {
         unset($_SESSION['obj']);
@@ -25,11 +28,19 @@ function comprobarCookie($cookie) {
         setcookie('ultCone', $fechaActualFormato, time() + 300, '/');
     }
 }
+/**
+ * Comprueba si la cookie sigue disponible
+ */
 function comprobarInicio(){
     if(isset($_COOKIE['ultCone'])){
         header('Location: ./pages/homePages.php');
     }
 }
+/**
+ * Cerrar la session o eliminar la cookie
+ * 
+ * @param array $sesion datos de la session
+ */
 function cerrarSesion(&$sesion) {
     $sesion = array();
     session_start();

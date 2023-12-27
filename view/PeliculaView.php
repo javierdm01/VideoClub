@@ -1,6 +1,13 @@
 <?php
-
+/**
+ * Clase PeliculaView
+ */
 class PeliculaView {
+    /**
+     * Muestra la cabecera de la tabla
+     *
+     * @param boolean $admin es true si es admin
+     */
     public function mostrarCabecera($admin) {
         echo '<thead>
                 <tr>
@@ -18,10 +25,20 @@ class PeliculaView {
             </thead>
             <tbody>';
     }
-    // Muestra la lista de tareas
+    /**
+     * Muestra el fin del body de la tabla
+     *
+     * 
+     */
     public function mostrarFin(){
         echo '</tbody>';
     }
+    /**
+     * Muestra los botones de accion
+     *
+     * @param number $id id de cada pelicula
+     * 
+     */
     public function mostrarAcciones($id){
         echo '<td><form method="POST" action="' . $_SERVER["PHP_SELF"] . '">
                         <input type="hidden" name="mod" value="' . $id-1 . '">
@@ -34,7 +51,13 @@ class PeliculaView {
                         </form></td>';
                 echo '</tr>';
     }
-    
+    /**
+     * Muestra toda la información de la pelicula
+     *
+     * @param string $mod   continene la columna a modificar si procede
+     * @param array $peliculas contiene los datos de las peliculas
+     * @param number $i valor acumulativo
+     */
     public function mostrarPeliculas(&$mod,$peliculas,$i) {
         
             if ($mod!=null && intval($mod) === $i) {
@@ -79,6 +102,13 @@ class PeliculaView {
             }
     }
     
+    /**
+     * Muestra toda la información de la pelicula
+     *
+     * @param string $actores  contiene los datos de los actores para la pelicula
+     * @param array $peliculas contiene los datos de las pelicula a insertar
+     * 
+     */
     public function insertarPeliculas($actores,$peliculas){
         echo '<div class="modal" id="insertarPeliculas" >
             <div class="modal-dialog">
@@ -139,7 +169,10 @@ class PeliculaView {
             </div>
         </div>';
     }
-    
+    /**
+     * Muestra toda el modal para modificar de la pelicula
+     *
+     */
     public function modalModificar() {
         echo '<div class="modal" id="miModal">
             <div class="modal-dialog">
@@ -164,6 +197,12 @@ class PeliculaView {
                 </div>
         </div></form>';
     }
+    /**
+     * Muestra el modal si estas seguro de eliminar
+     *
+     * @param number $id   identificador de la pelicula a eliminar
+     * 
+     */
     public function modalEliminar($id) {
         echo '<div class="modal" id="eliminar'.$id.'">
             <div class="modal-dialog">
@@ -189,7 +228,10 @@ class PeliculaView {
             </div>
         </div>';
     }
-    
+    /**
+     * Mostrar el boton para insertar
+     *
+     */
     public function mostrarBtnInsertar(){
         echo '<button class="btn btn-primary mb-3" data-toggle="modal" data-target="#insertarPeliculas">Insertar Pelicula</button>';
     }

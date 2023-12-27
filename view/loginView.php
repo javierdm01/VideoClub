@@ -1,7 +1,12 @@
 <?php
-
+/**
+ * Clase LoginView
+ */
 class loginView {
-
+    /**
+     * Muestra el login
+     *
+     */
     function mostrarLogin() {
         echo '<section class="vh-75 gradient-custom">
                 <div class="container h-75">

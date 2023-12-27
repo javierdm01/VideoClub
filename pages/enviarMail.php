@@ -29,16 +29,16 @@
 <!--INICIO DEL BODY -->
 <body>
     <!--INICIO DE LA CABECERA -->
-    
+        <?php include $_SERVER['DOCUMENT_ROOT'].'/VideoClub/templates/headerStyle.php'; ?>
     <!--FIN DE LA CABECERA -->
     <!--INICIO DEL CONTENEDOR -->
     <div class="container">
-            <?php include $_SERVER['DOCUMENT_ROOT'].'/VideoClub/templates/headerStyle.php'; ?>
             <main class="col-md-12">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="well well-sm">
+                                <!-- Formulario de Mail -->
                                 <form class="form-horizontal" method="post" action="../config/configEmail.php">
                                     <fieldset>
                                         <legend class="text-center ">Contacta con Nosotros</legend>
@@ -68,6 +68,7 @@
                                         </div>
                                     </fieldset>
                                 </form>
+                                <!-- Fin Formulario Mail -->
                             </div>
                         </div>
                     </div>

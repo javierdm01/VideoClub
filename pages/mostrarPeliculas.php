@@ -3,14 +3,17 @@
     include $_SERVER['DOCUMENT_ROOT'].'/VideoClub/controllers/PeliculaController.php';
     include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/libraries/functions.php';
     session_start();
+    //Comprobar si la cookie está activa
     comprobarCookie($_COOKIE);
-    $admin=false;   
+    $admin=false;
+    //Si está inicializada la sesión obj desencriptar y asignar el rol admin si lo merece
     if(isset($_SESSION['obj'])){
         $usu = (unserialize(base64_decode($_SESSION['obj'])));
         if ($usu['rol']==1) {
             $admin=true;
         }
     }
+    //Saber cual es que se necesita para editar
     if(isset($_POST['mod'])){
         $mod=$_POST['mod'];
     }
@@ -29,12 +32,15 @@
 
 <body>
 <?php
+    //Modificar Películas
      if(isset($_POST['datos'])){
          $peliculaController->editarPeliculas($_POST);
      }
+     //Insertar Películas
      if(isset($_POST['insertar'])){
          $peliculaController->insertarPeliculas($_POST);
      }
+     //Eliminar Películas
      if(isset($_POST['clear'])){
          $peliculaController->eliminarPeliculas($_POST['clear']);
      }
@@ -46,13 +52,14 @@
         <!-- Caracteristicas de coches -->
         <table class="table text-center">
                 <?php
-                    //This function print data for table cars
+                    //Mostar Películas
                     $peliculaController->verPeliculas($mod,$admin);
                 ?>
 
         </table>
         <!-- INICIO MODAL -->
                 <?php
+                    //Modal Insertar Películas
                     $peliculaController->mostrarInsertarPeliculas($admin);
                 ?>
         <!-- FIN MODAL -->

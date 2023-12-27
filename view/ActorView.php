@@ -1,8 +1,14 @@
 <?php
-
+/**
+ * Clase ActorView
+ */
 class ActorView {
 
-    // Muestra la lista de tareas
+    /**
+     * Muestra la fotografia de los actores
+     *
+     * @param array $actores datos de la Pelicula
+     */
     public function mostrarActores($actores) {
         echo '<td class="w-25">';
         if(count($actores)!=0){

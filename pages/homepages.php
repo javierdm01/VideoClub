@@ -1,8 +1,9 @@
 <?php
     include_once $_SERVER['DOCUMENT_ROOT'] . '/VideoClub/libraries/functions.php';
     session_start();
+    //Descodificar datos usuario
     $usu = (unserialize(base64_decode($_SESSION['obj'])));
-    
+    //Comprobar si la cookie está activa
     comprobarCookie($_COOKIE);
 ?>
 <!DOCTYPE html>
@@ -18,8 +19,8 @@
 <!--INICIO DEL BODY -->
 <body>
     <!--INICIO DE LA CABECERA -->
-    <!--FIN DE LA CABECERA -->
     <?php include $_SERVER['DOCUMENT_ROOT'].'/VideoClub/templates/headerStyle.php'; ?>
+    <!--FIN DE LA CABECERA -->
     <!--INICIO DEL CONTENEDOR -->
     <div class="container-fluid">
         <div class="row">
