@@ -3,7 +3,7 @@
     include $_SERVER['DOCUMENT_ROOT'].'/VideoClub/controllers/PeliculaController.php';
     include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/libraries/functions.php';
     session_start();
-    comprobarInicio($_COOKIE);
+    comprobarCookie($_COOKIE);
     if(isset($_SESSION['obj'])){
         $usu = (unserialize(base64_decode($_SESSION['obj'])));
         if ($usu['rol']==1) {

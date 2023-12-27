@@ -45,7 +45,7 @@
     <!-- Right elements -->
     <div class="d-flex align-items-center">
       <!-- Icon -->
-      <a class="text-reset me-3" href="../index.php">
+      <a class="text-reset me-3" href="../index.php?crr">
         <i class="fa fa-sign-out" aria-hidden="true"></i>
       </a>
 

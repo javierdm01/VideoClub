@@ -3,8 +3,13 @@
     include $_SERVER['DOCUMENT_ROOT'].'/VideoClub/models/Usuario.php';
     include $_SERVER['DOCUMENT_ROOT'].'/VideoClub/controllers/UsuarioController.php';
     require_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/templates/mensajeError.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/libraries/functions.php';
     //Me devuelve un array con objetos
     session_start();
+    if(isset($_GET['crr'])){
+        cerrarSesion($_SESSION);
+    }
+    comprobarInicio();
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         if($_POST['usr']!='' && $_POST['pass']!=''){
             $usuarioController = new UsuarioController();

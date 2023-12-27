@@ -3,7 +3,7 @@
     session_start();
     $usu = (unserialize(base64_decode($_SESSION['obj'])));
     
-    comprobarInicio($_COOKIE);
+    comprobarCookie($_COOKIE);
 ?>
 <!DOCTYPE html>
 <html lang="es">

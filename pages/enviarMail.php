@@ -3,7 +3,7 @@
     include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/templates/mensajeCheck.php';
     include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/templates/mensajeError.php';
     session_start();
-    comprobarInicio($_COOKIE);
+    comprobarCookie($_COOKIE);
     $usu = (unserialize(base64_decode($_SESSION['obj'])));  
     if(isset($_GET['trr'])){
         mensajeCheck('Correo enviado con éxito');

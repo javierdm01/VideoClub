@@ -15,8 +15,9 @@ function enviarMail() {
         echo 'El archivo no existe.';
     }
 }
-function comprobarInicio($cookie) {
+function comprobarCookie($cookie) {
     if (!$cookie['ultCone']) {
+        unset($_SESSION['obj']);
         header('Location: ../index.php');
     }else{
         $fechaActual=new DateTime();
@@ -24,10 +25,16 @@ function comprobarInicio($cookie) {
         setcookie('ultCone', $fechaActualFormato, time() + 300, '/');
     }
 }
+function comprobarInicio(){
+    if(isset($_COOKIE['ultCone'])){
+        header('Location: ./pages/homePages.php');
+    }
+}
 function cerrarSesion(&$sesion) {
     $sesion = array();
-    session_destroy();
-    setcookie("nombreSesion", 123, time() - 1000, "localhost");
-    setcookie("ultCone", 123, time() - 1000, "localhost");
-    setcookie("PHPSESSID", 123, time() - 1000, "localhost");
+    session_start();
+    setcookie("ultCone", '', time() - 3600, "/");
+    setcookie(session_name(), '', time() - 3600, "/");
+    unset($_SESSION['obj']);
+    header('Location: ../index.php');
 }
