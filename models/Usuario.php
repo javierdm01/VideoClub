@@ -68,4 +68,20 @@ class Usuario {
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+    public function comprobarLogs(){
+        $sql = "CREATE TABLE IF NOT EXISTS logs (mensaje varchar(255))";
+        
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    public function enviarLogs($mensaje){
+        $sql = "INSERT INTO logs (mensaje) VALUES ('$mensaje')";
+        
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }

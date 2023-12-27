@@ -1,16 +1,34 @@
-<div class="container mt-4">
-    <h1 class="text-center">Inicio de sesión VideoClub</h1>
-    <form method="POST" class="text-center mt-4 p-4 border d-flex align-items-center flex-column" style="width: 400px; margin: auto" action='<?= $_SERVER["PHP_SELF"] ?>'>
-        <div class="form-group m-2" style="width: 300px">
-            <label for="usr">Usuario</label>
-            <input  type="text" class="form-control" id="usr" name="usr" placeholder="Usuario">
-            <input type="hidden" id="token" name="token"> 
+<section class="vh-75 gradient-custom">
+  <div class="container h-75">
+    <div class="row d-flex justify-content-center  h-75">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card bg-dark text-white mt-4" style="border-radius: 1rem;">
+          <div class="card-body px-5 text-center">
+
+            <div class="mt-md-4 pb-2">
+
+              <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+              <p class="text-white-50 mb-5">Bienvenido a nuestro VideoClub!</p>
+              <form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="POST">
+              <div class="form-outline form-white mb-4">
+                  <input type="text" id="usr" name="usr" class="form-control form-control-lg" />
+                <label class="form-label" for="usr">Username</label>
+              </div>
+
+              <div class="form-outline form-white mb-4">
+                  <input type="password" id="pass" name="pass" class="form-control form-control-lg" />
+                <label class="form-label" for="pass">Password</label>
+              </div>
+
+              <p class="small mb-4"><a class="text-white-50" href="#">Forgot password?</a></p>
+
+              <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+                </form>
+
+            </div>
+          </div>
         </div>
-        <div class="form-group m-2" style="width: 300px">
-            <label for="pass">Contraseña</label>
-            <input type="password" class="form-control" id="pass" name="pass" placeholder="Contraseña">
-        </div>
-            <!--<input type="hidden" class="form-control" id="token" name="token" value="</*?= $_SESSION['token'] ?*/>">-->
-        <button type="submit" class="mt-3 btn btn-primary">Iniciar Sesión</button>
-    </form>
-</div>
+      </div>
+    </div>
+  </div>
+</section>
