@@ -189,6 +189,10 @@ class PeliculaView {
             </div>
         </div>';
     }
+    
+    public function mostrarBtnInsertar(){
+        echo '<button class="btn btn-primary mb-3" data-toggle="modal" data-target="#insertarPeliculas">Insertar Pelicula</button>';
+    }
 }
 
 

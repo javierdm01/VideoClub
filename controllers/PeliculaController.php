@@ -1,6 +1,7 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/view/PeliculaView.php';
 include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/controllers/ActorController.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/controllers/ActuanController.php';
 include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/templates/mensajeError.php';
 include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/templates/mensajeCheck.php';
 class PeliculaController {
@@ -9,11 +10,13 @@ class PeliculaController {
     private $model;
     private $view;
     private $controller;
+    private $actuanController;
 
     public function __construct() {
         $this->model = new Pelicula();
         $this->view = new PeliculaView();
         $this->controller= new ActorController();
+        $this->actuanController=new ActuanController();
     }
 
     // Muestra la lista de tareas
@@ -47,19 +50,26 @@ class PeliculaController {
         }
         if($valido){
             $this->model->insertarPelicula($post);
+            if(isset($post['actores'])){
+                $this->actuanController->insertarActuan($post);
+            }
         }else{
             echo mensajeError('El titulo está repetido, intentelo de nuevo');
         }
     }
-    public function mostrarInsertarPeliculas() {
-        $actores= $this->controller->obtenerActores();
-        $pelicula=$this->model->getPeliculas();
-        $this->view->insertarPeliculas($actores,$pelicula);
+    public function mostrarInsertarPeliculas($admin) {
+        if($admin){
+            $this->view->mostrarBtnInsertar();
+            $actores= $this->controller->obtenerActores();
+            $pelicula=$this->model->getPeliculas();
+            $this->view->insertarPeliculas($actores,$pelicula);
+        }
     }
     public function mostrarModal() {
         $this->view->modalModificar();
     }
     public function eliminarPeliculas($id){
+        $this->actuanController->eliminarActuan($id);
         $this->model->eliminarPelicula($id);
     }
 }

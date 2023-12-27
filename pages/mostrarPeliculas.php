@@ -4,6 +4,7 @@
     include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/libraries/functions.php';
     session_start();
     comprobarCookie($_COOKIE);
+    $admin=false;   
     if(isset($_SESSION['obj'])){
         $usu = (unserialize(base64_decode($_SESSION['obj'])));
         if ($usu['rol']==1) {
@@ -50,11 +51,9 @@
                 ?>
 
         </table>
-        
-        <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#insertarPeliculas">Insertar Pelicula</button>
         <!-- INICIO MODAL -->
                 <?php
-                    $peliculaController->mostrarInsertarPeliculas();
+                    $peliculaController->mostrarInsertarPeliculas($admin);
                 ?>
         <!-- FIN MODAL -->
     </div>

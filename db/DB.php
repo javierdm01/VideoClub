@@ -11,7 +11,7 @@ class DB {
             $this->pdo = new PDO("mysql:host=$host;dbname=$dbname", $usuario, $pwd);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (Exception $ex) {
-            echo $ex->getMessage();
+            throw new Exception('Error en la conexión a la base de datos');
         }
     }
 

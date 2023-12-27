@@ -1,20 +1,42 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/db/DB.php';
+
+/**
+ * Clase Actuan esta clase representa la relación entre Pelicula y Actores
+ */
 class Actuan{
+    
+    /**
+     * @var number identificador de Pelicula
+     */
     private $idPelicula;
+    
+    /**
+     * @var number identificador de Actor
+     */
     private $idActor;
     
     //Conexion Atributtes
-    private $bd;
+    private $db;
     private $pdo; 
 
 
-    public function __construct($id, $nombre) {
-        $this->id = $idPelicula;
-        $this->nombre = $idActor;
-        $this->bd=new BD();
-        $this->pdo= $this->$bd->getPDO();
+    /**
+     * Constructor de la clase Actuan
+     */
+    public function __construct() {
+        $this->db=new DB();
+        $this->pdo= $this->db->getPDO();
     }
+    /**
+     * Destructor de la clase Actuan
+     */
+    public function __destruct() {
+        $this->pdo = null;
+    }
+    /**
+     * Getters and setters
+     */
     public function getIdPelicula() {
         return $this->idPelicula;
     }
@@ -47,54 +69,57 @@ class Actuan{
         $this->pdo = $pdo;
     }
 
+    /**
+     * Devuelve un array con todas los valores de la tabla Actuan
+     *
+     */
     public function getActuaciones(){
-        $stmt= $this->pdo->prepare('SELECT * FROM actuan');
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC); 
+        try {
+            $stmt= $this->pdo->prepare('SELECT * FROM actuan');
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC); 
+        } catch (Exception $exc) {
+            mensajeError('Se ha producido un error al obtener la tabla Actuan');
+        }
     }
     
-    public function modificarActuacion(){
-        $sql = "UPDATE actuan SET 
-                idPelicula = :idPelicula, 
-                idActor = :idActor
-                WHERE idPelicula = :idPelicula and idActor= :idActor";
-        
-        $stmt= $this->pdo->prepare($sql);
-        
-        $stmt->bindParam(':idPelicula', $this->idPelicula);
-        $stmt->bindParam(':idActor', $this->idActor);
-        
-        $stmt->execute();
-        $stmt->fetchAll(PDO::FETCH_ASSOC); 
-        
-        $stmt->closePDO();
-    }
-    public function insertarActuacion(){
-         $sql = "INSERT INTO actuan (idPelicula, idActor) 
-                VALUES (:idPelicula, :idActor)";
+    /**
+     * Hace una insercción en la tabla Actuan 
+     *
+     */
+    public function insertarActuacion($post){
+        try {
+            for ($i = 0; $i < count($post['actores']); $i++) {
+                $sql = "INSERT INTO actuan (idPelicula, idActor) 
+                    VALUES (:idPelicula, :idActor)";
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->bindParam(':idPelicula', $post['id']);
+                $stmt->bindParam(':idActor', $post['actores'][$i]);
+                $stmt->execute();
+            }
+        } catch (Exception $exc) {
+            mensajeError('Se ha producido un error al insertar los actores en la pelicula');
+        }
          
-        $stmt= $this->pdo->prepare($sql);
         
-        $stmt->bindParam(':idPelicula', $this->idPelicula);
-        $stmt->bindParam(':idActor', $this->idActor);
-        
-        $stmt->execute();
-        $stmt->fetchAll(PDO::FETCH_ASSOC); 
-        
-        $stmt->closePDO();
     }
-    public function eliminarActuacion(){
-        $sql = "DELETE FROM actuan WHERE idPelicula = :idPelicula and idActor = :idActor";
-         
-        $stmt= $this->pdo->prepare($sql);
-        
-        $stmt->bindParam(':idPelicula', $this->idPelicula);
-        $stmt->bindParam(':idActor', $this->idActor);
-        
-        $stmt->execute();
-        
-        $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-        $stmt->closePDO();
+    
+    /**
+     * Actualiza en la tabla Actuan 
+     *
+     */
+    public function eliminarActuacion($id) {
+        try {
+            $sql = "DELETE FROM actuan WHERE idPelicula = :id";
+
+            $stmt = $this->pdo->prepare($sql);
+
+            $stmt->bindParam(':id', $id);
+
+            $stmt->execute();
+
+        } catch (Exception) {
+            mensajeError('Se ha producido un error al eliminar las peliculas');
+        }
     }
 }

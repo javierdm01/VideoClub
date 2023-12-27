@@ -1,19 +1,20 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'].'/VideoClub/db/DB.php';
+
+include_once $_SERVER['DOCUMENT_ROOT'] . '/VideoClub/db/DB.php';
+
 class Actor {
+
     private $id;
     private $nombre;
     private $apellido;
     private $fotografia;
-    
     //Conexion Atributtes
     private $bd;
-    private $pdo; 
-
+    private $pdo;
 
     public function __construct() {
-        $this->bd=new DB();
-        $this->pdo= $this->bd->getPDO();
+        $this->bd = new DB();
+        $this->pdo = $this->bd->getPDO();
     }
 
     public function getId() {
@@ -47,12 +48,14 @@ class Actor {
     public function setFotografia($fotografia): void {
         $this->fotografia = $fotografia;
     }
-    public function extraerActores(){
+
+    public function extraerActores() {
         $stmt = $this->pdo->prepare('SELECT *
                                 FROM actores');
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
     public function getActores($id) {
         $stmt = $this->pdo->prepare('SELECT actores.nombre, actores.apellidos, actores.fotografia
                                 FROM actores
@@ -63,67 +66,4 @@ class Actor {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    public function modificarActor(){
-        $sql = "UPDATE actores SET 
-                id = :id, 
-                nombre = :nombre, 
-                apellidos = :apellidos, 
-                fotografia = :fotografia
-                WHERE id = :id";
-        
-        $stmt= $this->pdo->prepare($sql);
-        
-        $stmt->bindParam(':id', $this->id);
-        $stmt->bindParam(':nombre', $this->nombre);
-        $stmt->bindParam(':apellidos', $this->apellido);
-        $stmt->bindParam(':fotografia', $this->fotografia);
-        
-        $stmt->execute();
-        $stmt->fetchAll(PDO::FETCH_ASSOC); 
-        
-        $stmt->closePDO();
-    }
-    public function insertarActor(){
-         $sql = "INSERT INTO actores (id, nombre, apellidos, fotografia) 
-                VALUES (:id, :nombre, :apellidos, :fotografia)";
-         
-        $stmt= $this->pdo->prepare($sql);
-        
-        $stmt->bindParam(':id', $this->id);
-        $stmt->bindParam(':nombre', $this->nombre);
-        $stmt->bindParam(':apellidos', $this->apellido);
-        $stmt->bindParam(':fotografia', $this->fotografia);
-        
-        $stmt->execute();
-        $stmt->fetchAll(PDO::FETCH_ASSOC); 
-        
-        $stmt->closePDO();
-    }
-    public function eliminarActor(){
-        $sql = "DELETE FROM actuan WHERE idActor = :id";
-        
-        $stmt= $this->pdo->prepare($sql);
-        
-        $stmt->bindParam(':id', $this->id);
-        
-        $stmt->execute();
-        
-        $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-        $stmt->closePDO();
-        
-        $sql2 = "DELETE FROM peliculas WHERE id = :id";
-         
-        $stmt2= $this->pdo->prepare($sql2);
-        
-        $stmt2->bindParam(':id', $this->id);
-        
-        $stmt2->execute();
-        
-        $stmt2->fetchAll(PDO::FETCH_ASSOC);
-        
-        $stmt2->closePDO();
-    }
 }
-
