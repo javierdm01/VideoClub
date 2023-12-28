@@ -44,11 +44,11 @@ class PeliculaView {
                         <input type="hidden" name="mod" value="' . $id-1 . '">
                         <button class="btn btn-primary border" type="submit"><i class="fa-solid fa-pencil"></i></button>
                     </form></td>';
-                echo '<td><form method="POST" action="' . $_SERVER["PHP_SELF"] . '">
-                        <input type="hidden" name="clear" id="clear" value="' . $id . '">
-                        '.$this->modalEliminar($id).'
+                echo '<td>
+                        
+                        
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#eliminar'.$id.'"><i class="fa-solid fa-trash"></i></button>
-                        </form></td>';
+                        '.$this->modalEliminar($id).'</td>';
                 echo '</tr>';
     }
     /**
@@ -196,16 +196,18 @@ class PeliculaView {
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+                    <form method="POST" action="' . $_SERVER["PHP_SELF"] . '">
                     <div class="modal-body">
                             <h2>¿Estás seguro que quieres eliminar esta pelicula?</h2>
                             <div class="modal-footer">
+                            <input type="hidden" name="clear" id="clear" value="' . $id . '">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                 <input type="submit" class="btn btn-primary" value="Eliminar">
                             </div>
                     </div>
                 </div>
             </div>
-        </div>';
+        </div></form>';
     }
     /**
      * Mostrar el boton para insertar
