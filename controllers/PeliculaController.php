@@ -84,7 +84,7 @@ class PeliculaController {
      * @param boolean $admin muestra true si es admin
      */
     public function mostrarInsertarPeliculas($admin) {
-        if($admin){
+        if($admin && !isset($_POST['mod'])){
             $this->view->mostrarBtnInsertar();
             $actores= $this->controller->obtenerActores();
             $pelicula=$this->model->getPeliculas();

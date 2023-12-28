@@ -21,12 +21,12 @@ class loginView {
                             <p class="text-white-50 mb-5">Bienvenido a nuestro VideoClub!</p>
                             <form action="'.$_SERVER["PHP_SELF"] .'" method="POST">
                             <div class="form-outline form-white mb-4">
-                                <input type="text" id="usr" name="usr" class="form-control form-control-lg" />
+                                <input type="text" id="usr" name="usr" class="form-control form-control-lg" >
                               <label class="form-label" for="usr">Username</label>
                             </div>
 
                             <div class="form-outline form-white mb-4">
-                                <input type="password" id="pass" name="pass" class="form-control form-control-lg" />
+                                <input type="password" id="pass" name="pass" class="form-control form-control-lg" >
                               <label class="form-label" for="pass">Password</label>
                             </div>
 

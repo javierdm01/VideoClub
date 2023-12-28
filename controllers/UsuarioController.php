@@ -41,6 +41,7 @@ class UsuarioController {
         }
         else{
             echo mensajeError('El usuario o la contraseña no son válidas.');
+            $this->model->comprobarLogs();
             $this->model->enviarLogs('El usuario '.$username.' ha intentado iniciar sesión con fecha '.$fechaActualFormato.' no satisfactorio');
         }
     }

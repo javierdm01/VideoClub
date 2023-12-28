@@ -47,5 +47,4 @@ function cerrarSesion(&$sesion) {
     setcookie("ultCone", '', time() - 3600, "/");
     setcookie(session_name(), '', time() - 3600, "/");
     unset($_SESSION['obj']);
-    header('Location: ../index.php');
 }

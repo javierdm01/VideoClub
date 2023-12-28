@@ -11,15 +11,15 @@ class PeliculaView {
     public function mostrarCabecera($admin) {
         echo '<thead>
                 <tr>
-                    <th class="col">Cartel</td>
-                    <th class="col">Título</td>
-                    <th class=col">Género</td>
-                    <th class="col">País</td>
-                    <th class="col">Año</td>
-                    <th class="col">Reparto</td>';
+                    <th class="col">Cartel</th>
+                    <th class="col">Título</th>
+                    <th class="col">Género</th>
+                    <th class="col">País</th>
+                    <th class="col">Año</th>
+                    <th class="col">Reparto</th>';
              if($admin){
-                 echo '<th class="col">Editar</td>
-                    <th class="col">Eliminar</td>';
+                 echo '<th class="col">Editar</th>
+                    <th class="col">Eliminar</th>';
              }       
             echo    '</tr>
             </thead>
@@ -67,7 +67,7 @@ class PeliculaView {
                 echo '<input type="hidden" name="id" value="' . $peliculas[$i]['id'] . '">';
 
                 echo '<td class="w-25">';
-                echo '<img class="w-50 mx-auto img-fluid" src="../assets/img/' . $peliculas[$i]['cartel'] . '">';
+                echo '<img class="w-50 mx-auto img-fluid" alt="cartel" src="../assets/img/' . $peliculas[$i]['cartel'] . '">';
                 echo '<input value=' . $peliculas[$i]['cartel'] . ' type="text" name="cartel" class="form-control" id="cartel">';
                 echo '</td>';
 
@@ -91,8 +91,8 @@ class PeliculaView {
                 echo '</td></tr>';
             } else {
                 echo '<tr>
-                    <td class="w-25"><img class="w-50 mx-auto img-fluid" src="../assets/img/' . $peliculas[$i]['cartel'] . '"></td>
-                    <td class= w-50"><h2 class="fs-3">' . $peliculas[$i]['titulo'] . '</h2>
+                    <td class="w-25"><img alt="cartel" class="w-50 mx-auto img-fluid" src="../assets/img/' . $peliculas[$i]['cartel'] . '"></td>
+                    <td class="w-25"><h2 class="fs-4">' . $peliculas[$i]['titulo'] . '</h2>
                     <td><p>' . $peliculas[$i]['genero'] . '</p></td>
                     <td><p>' . $peliculas[$i]['pais'] . '</p></td>
                     <td><p>' . $peliculas[$i]['anyo'] . '</p></td>
@@ -109,66 +109,49 @@ class PeliculaView {
      * @param array $peliculas contiene los datos de las pelicula a insertar
      * 
      */
-    public function insertarPeliculas($actores,$peliculas){
-        echo '<div class="modal" id="insertarPeliculas" >
+   public function insertarPeliculas($actores, $peliculas)
+{
+    echo '<div class="modal" id="insertarPeliculas" >
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Agregar Coche</h5>
+                        <h5 class="modal-title">Insertar Peliculas</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <!-- Agregar Nueva Pelicula-->
-                        <form method="POST" action="'. $_SERVER["PHP_SELF"] .'">
+                        <form method="POST" action="' . $_SERVER["PHP_SELF"] . '">
                             <input type="hidden" id="insertar" name="insertar" value="">
-                            <input type="hidden" id="id" name="id" value="'. count($peliculas)+1 .'">
-                            <div class="form-group">
-                                <label for="vin">Titulo</label>
-                                <input type="text" name="titulo" class="form-control" id="titulo" placeholder=" Harry Potter" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="matricula">Género</label>
-                                <input type="text" name="genero"  class="form-control" id="genero" placeholder=" Crimen" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="marca">País</label>
-                                <input type="text" name="pais"  class="form-control" id="pais" placeholder=" España" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="modelo">Año</label>
-                                <input type="number" name="anyo"  class="form-control" id="anyo" placeholder=" 2022" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="cartel">Cartel</label>
-                                <input type="text" name="cartel"  class="form-control" id="cartel" placeholder=" titanic.jpg" required>
-                            </div>
+                            <input type="hidden" id="id" name="id" value="' . count($peliculas) + 1 . '">
+                            <!-- Resto de tu formulario -->
                             <div class="form-group d-flex flex-column">
                                 <label for="reparto">Reparto</label>
                                 <div id="reparto" class="d-flex justify-content-around flex-wrap">
                                     ';
-                                    for($i=0;$i<count($actores);$i++){
-                                        
-                                    echo '<div class="w-25 m-1"><input class="form-check-input" type="checkbox" value="'.$actores[$i]['id'].'" name="actores[]" id="'.$actores[$i]['id'].'">
-                                    <label class="form-check-label" for="'.$actores[$i]['id'].'">
-                                        '.$actores[$i]['nombre'].' '. substr($actores[$i]['apellidos'], 0, 2).'
-                                    </label></div>';
-                                    }
-                                    
-                                  echo '</div>
-                                    
+    for ($i = 0; $i < count($actores); $i++) {
+        echo '<div class="w-25 m-1"><input class="form-check-input" type="checkbox" value="' . $actores[$i]['id'] . '" name="actores[]" id="' . $actores[$i]['id'] . '">
+                                        <label class="form-check-label" for="' . $actores[$i]['id'] . '">
+                                            ' . $actores[$i]['nombre'] . ' ' . substr($actores[$i]['apellidos'], 0, 2) . '
+                                        </label></div>';
+    }
+
+    echo '</div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                <input type="submit" class="btn btn-primary" value="Guardar">
-                            </div>';
-                        echo '</form>
-                    </div>
+                        </div> <!-- Cierre de modal-body -->
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <input type="submit" class="btn btn-primary" value="Guardar">
+                        </div>
+                    </form>
                 </div>
             </div>
-        </div>';
-    }
+        </div>
+    </div>';
+}
+
     /**
      * Muestra toda el modal para modificar de la pelicula
      *
@@ -214,11 +197,7 @@ class PeliculaView {
                         </button>
                     </div>
                     <div class="modal-body">
-                        <!-- Agregar Nuevo coche-->
-                        <form method="POST" action="' . $_SERVER["PHP_SELF"] . '">
                             <h2>¿Estás seguro que quieres eliminar esta pelicula?</h2>
-
-
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                 <input type="submit" class="btn btn-primary" value="Eliminar">
