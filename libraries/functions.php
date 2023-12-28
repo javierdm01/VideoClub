@@ -19,13 +19,13 @@ function enviarMail() {
  * @param arrays $cookie valores de la cookie
  */
 function comprobarCookie($cookie) {
-    if (!$cookie['ultCone']) {
-        unset($_SESSION['obj']);
-        header('Location: ../index.php');
-    }else{
+    if(isset($_COOKIE['ultCone']) && isset($_SESSION['obj'])){
         $fechaActual=new DateTime();
         $fechaActualFormato = $fechaActual->format('Y-m-d H:i:s');
         setcookie('ultCone', $fechaActualFormato, time() + 300, '/');
+    }else{
+        unset($_SESSION['obj']);
+        header('Location: ../index.php');
     }
 }
 /**

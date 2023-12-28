@@ -34,10 +34,32 @@ try {
     $mail->addAddress($_POST['email']); // Cambia esto al destinatario real
 
     $mail->isHTML(false);
-    $mail->Subject = $_POST['asunto'];
-    $mail->Body = $_POST['body'];
+    $mail->Subject = 'Re: '.$_POST['asunto'];
+    $mail->Body = "Hemos recibido su correo en breve contestaremos a sus dudas sobre el siguiente correo: \r\n\r\n\r\n".$_POST['body'];
 
     $mail->send();
+} catch (Exception $exc) {
+    header('Location: ../pages/enviarMail.php?err');
+}
+$mail2 = new PHPMailer(true);
+try {
+    $mail2->isSMTP();
+    $mail2->Host = 'smtp.gmail.com';
+    $mail2->SMTPAuth = true;
+    $mail2->Username ='videoclub112@gmail.com'; // Cambia esto
+    $mail2->Password = 'cmub mqrn bphw zgsx'; //  // 'conce200#'
+    $mail2->SMTPSecure = 'ssl';
+    $mail2->Port = 465;
+    $mail2->Timeout = 5;
+
+    $mail2->setFrom($_POST['email']);
+    $mail2->addAddress('videoclub112@gmail.com'); // Cambia esto al destinatario real
+
+    $mail2->isHTML(false);
+    $mail2->Subject = "Incidencia de: ".$_POST['email']." : ".$_POST['asunto'];
+    $mail2->Body = $_POST['body'];
+
+    $mail2->send();
     header('Location: ../pages/enviarMail.php?trr');
 } catch (Exception $exc) {
     header('Location: ../pages/enviarMail.php?err');
