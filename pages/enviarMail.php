@@ -45,19 +45,19 @@
 
                                         <div class="form-group ">
                                             <div class="col-md-8  mx-auto">
-                                                <input id="email" name="email" type="text" placeholder="Correo Electrónico" class="form-control">
+                                                <input id="email" name="email" type="text" placeholder="Correo Electrónico" class="form-control" required>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="col-md-8 mx-auto" >
-                                                <input id="asunto" name="asunto" type="text" placeholder="Asunto" class="form-control">
+                                                <input id="asunto" name="asunto" type="text" placeholder="Asunto" class="form-control" required>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="col-md-8 mx-auto">
-                                                <textarea class="form-control" id="body" name="body" placeholder="Introduce tu mensaje aquí." rows="7"></textarea>
+                                                <textarea class="form-control" id="body" name="body" placeholder="Introduce tu mensaje aquí." required rows="7"></textarea>
                                             </div>
                                         </div>
 

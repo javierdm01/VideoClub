@@ -125,7 +125,26 @@ class PeliculaView {
                         <form method="POST" action="' . $_SERVER["PHP_SELF"] . '">
                             <input type="hidden" id="insertar" name="insertar" value="">
                             <input type="hidden" id="id" name="id" value="' . count($peliculas) + 1 . '">
-                            <!-- Resto de tu formulario -->
+                            <div class="form-group">
+                                <label for="vin">Titulo</label>
+                                <input type="text" name="titulo" class="form-control" id="titulo" placeholder=" Harry Potter" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="matricula">Género</label>
+                                <input type="text" name="genero"  class="form-control" id="genero" placeholder=" Crimen" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="marca">País</label>
+                                <input type="text" name="pais"  class="form-control" id="pais" placeholder=" España" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="modelo">Año</label>
+                                <input type="number" name="anyo"  class="form-control" id="anyo" placeholder=" 2022" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cartel">Cartel</label>
+                                <input type="text" name="cartel"  class="form-control" id="cartel" placeholder=" titanic.jpg" required>
+                            </div>
                             <div class="form-group d-flex flex-column">
                                 <label for="reparto">Reparto</label>
                                 <div id="reparto" class="d-flex justify-content-around flex-wrap">

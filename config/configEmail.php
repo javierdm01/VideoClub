@@ -35,7 +35,7 @@ try {
 
     $mail->isHTML(false);
     $mail->Subject = 'Re: '.$_POST['asunto'];
-    $mail->Body = "Hemos recibido su correo en breve contestaremos a sus dudas sobre el siguiente correo: \r\n\r\n\r\n".$_POST['body'];
+    $mail->Body = "Hemos recibido su incidencia, en breve contestaremos a sus dudas proveninentes a la incidencia: \r\n\r\n\r\n".$_POST['body'];
 
     $mail->send();
 } catch (Exception $exc) {
